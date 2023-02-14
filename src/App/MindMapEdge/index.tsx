@@ -1,28 +1,17 @@
-import { Handle, NodeProps, Position } from 'reactflow';
+import React from 'react';
+import { BaseEdge, EdgeProps, getStraightPath } from 'reactflow';
 
-import useStore from '../store';
+function MindMapEdge(props: EdgeProps) {
+    const { sourceX, sourceY, targetX, targetY } = props;
 
-export type NodeData = {
-    label: string;
-};
+    const [edgePath] = getStraightPath({
+        sourceX,
+        sourceY,
+        targetX,
+        targetY,
+    });
 
-function MindMapNode({ id, data }: NodeProps<NodeData>) {
-    const updateNodeLabel = useStore((state) => state.updateNodeLabel);
-
-    return (
-        <>
-            <input
-                // from now on we can use value instead of defaultValue
-                // this makes sure that the input always shows the current label of the node
-                value={data.label}
-                onChange={(evt) => updateNodeLabel(id, evt.target.value)}
-                className="input"
-            />
-
-            <Handle type="target" position={Position.Top} />
-            <Handle type="source" position={Position.Top} />
-        </>
-    );
+    return <BaseEdge path={edgePath} {...props} />;
 }
 
-export default MindMapNode;
+export default MindMapEdge;

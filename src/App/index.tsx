@@ -107,7 +107,6 @@ function Flow() {
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
             nodeTypes={nodeTypes}
-            // @ts-ignore
             edgeTypes={edgeTypes}
             onConnectStart={onConnectStart}
             onConnectEnd={onConnectEnd}
